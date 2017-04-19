@@ -36,7 +36,7 @@ public class AnalyticsImplTest {
         event.setAction("birthday!");
         event.setAt(LocalDateTime.now());
         try {
-            assertFalse(analyticsImpl.addEvent(event));
+            analyticsImpl.addEvent(event);
             fail("should have returned IllegalArgumentException");
         } catch (IllegalArgumentException e) {
         }
@@ -48,7 +48,7 @@ public class AnalyticsImplTest {
         event.setAction("birthday!");
         event.setAt(LocalDateTime.now());
         try {
-            assertFalse(analyticsImpl.addEvent(event));
+            analyticsImpl.addEvent(event);
             fail("should have returned IllegalArgumentException");
         } catch (IllegalArgumentException e) {
         }
@@ -60,7 +60,7 @@ public class AnalyticsImplTest {
         event.setAction(null);
         event.setAt(LocalDateTime.now());
         try {
-            assertFalse(analyticsImpl.addEvent(event));
+            analyticsImpl.addEvent(event);
             fail("should have returned IllegalArgumentException");
         } catch (IllegalArgumentException e) {
         }
@@ -72,7 +72,7 @@ public class AnalyticsImplTest {
         event.setAction("");
         event.setAt(LocalDateTime.now());
         try {
-            assertFalse(analyticsImpl.addEvent(event));
+            analyticsImpl.addEvent(event);
             fail("should have returned IllegalArgumentException");
         } catch (IllegalArgumentException e) {
         }
@@ -84,12 +84,20 @@ public class AnalyticsImplTest {
         event.setAction("birthday!");
         event.setAt(null);
         try {
-            assertFalse(analyticsImpl.addEvent(event));
+            analyticsImpl.addEvent(event);
             fail("should have returned IllegalArgumentException");
         } catch (IllegalArgumentException e) {
         }
     }
 
-
+    @Test
+    public void testNullEvent() throws InterruptedException {
+        event = null;
+        try {
+            analyticsImpl.addEvent(event);
+            fail("should have returned IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+        }
+    }
 
 }

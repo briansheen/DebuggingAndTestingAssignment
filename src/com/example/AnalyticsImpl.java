@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 public class AnalyticsImpl implements Analytics {
 
     private static final Logger LOGGER = Logger.getLogger("com.example");
+    private static Random random = new Random();
+
 
     @Override
     public boolean addEvent(Event event) throws InterruptedException {
@@ -31,19 +33,16 @@ public class AnalyticsImpl implements Analytics {
             throw new IllegalArgumentException("Event action and name must not be empty");
         }
 
-        Random random = new Random();
-        if (random.nextInt(10) == 0) {
-            time = System.currentTimeMillis() - time;
-            LOGGER.info("addEvent method took: " + time + " ms");
-            return false;
-        }
-
         Thread.sleep(random.nextInt(3001));
 
         System.out.println(event);
 
         time = System.currentTimeMillis() - time;
         LOGGER.info("addEvent method took: " + time + " ms");
+
+        if (random.nextInt(10) == 0) {
+            return false;
+        }
 
         return true;
     }
